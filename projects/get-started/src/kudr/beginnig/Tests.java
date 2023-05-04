@@ -176,7 +176,7 @@ public class Tests {
     public static String payment() {
         String funcPath = "payment/";
         //Initialize return string of tests
-        String outputStr = "\tTests for arithmetic func\n";
+        String outputStr = "\tTests for payment func\n";
 
         //Create array of data
         final int cols = 4;
@@ -221,6 +221,75 @@ public class Tests {
 
                     //Add line of data to return string
                     outputStr += "Diff between min and max payment in \"" + lines[0][row] + " " + lines[1][row] + " " + + lines[2][row] + "\" is " + lines[3][row] + "\n";
+                }
+                catch (IOException ioEx) {
+                    System.out.println(ioEx.getMessage());
+                }
+            } catch (IOException ioEx) {
+                System.out.println(ioEx.getMessage());
+            }
+        }
+        return outputStr;
+    }
+    public static String biggerLesserEqual() {
+        String funcPath = "biggerLesserEqual/";
+        //Initialize return string of tests
+        String outputStr = "\tTests for biggerLesserEqual func\n";
+
+        //Create array of data
+        final int cols = 2;
+        final int rows = 5;
+        int[][] lines = new int[cols][rows];
+        String[] outLines = new String[rows];
+        for (int row = 0; row < rows; row++) {
+            //Try to initialize INPUT.TXT with random data
+            try (FileWriter inputWriter = new FileWriter(tasksPath + funcPath + inputName)) {
+                inputWriter.write((int) (Math.random() * (99999 * 2) - 100000 + 1) + "\n" + (int) (Math.random() * (99999 * 2) - 100000 + 1));
+                inputWriter.flush();
+            } catch (IOException ioEx) {
+                System.out.println(ioEx.getMessage());
+            }
+
+            //Test sumFromFile()
+            kudr.beginnig.Tasks.biggerLesserEqual();
+
+            //Try read INPUT.TXT
+            try (FileReader inputReader = new FileReader(tasksPath + funcPath + inputName)) {
+                int iCh;
+                StringBuilder readStr = new StringBuilder();
+                while ((iCh = inputReader.read()) != -1) {
+                    readStr.append((char) iCh);
+                }
+                String[] tmpNumbs = readStr.toString().split("\\r?\\n");
+                //Try read OUTPUT.TXT
+                try (FileReader outputReader = new FileReader(tasksPath + funcPath + outputName)) {
+                    int oCh;
+                    StringBuilder oAns = new StringBuilder();
+                    while ((oCh = outputReader.read()) != -1) {
+                        oAns.append((char) oCh);
+                    }
+                    try {
+                        //Try parse data from INPUT.TXT and OUTPUT.TXT and place them to array
+                        lines[0][row] = Integer.parseInt(tmpNumbs[0]);
+                        lines[1][row] = Integer.parseInt(tmpNumbs[1]);
+                        outLines[row] = oAns.toString();
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
+                    //Add line of data to return string
+                    if (lines[0][row] > lines[1][row] && outLines[row].equals(">")) {
+                        outputStr += lines[0][row] + " > " + lines[1][row] + " | " + outLines[row] + "\n";
+                    }
+                    else if (lines[0][row] == lines[1][row] && outLines[row].equals("=")) {
+                        outputStr += lines[0][row] + " = " + lines[1][row] + " | " + outLines[row] + "\n";
+                    }
+                    else if (lines[0][row] < lines[1][row] && outLines[row].equals("<")) {
+                        outputStr += lines[0][row] + " < " + lines[1][row] + " | " + outLines[row] + "\n";
+                    }
+                    else {
+                        outputStr += "Error\n";
+                    }
                 }
                 catch (IOException ioEx) {
                     System.out.println(ioEx.getMessage());

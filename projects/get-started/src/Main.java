@@ -6,5 +6,6 @@ public class Main {
         System.out.println(kudr.beginnig.Tests.guessGame());
         System.out.println(kudr.beginnig.Tests.arithmetic());
         System.out.println(kudr.beginnig.Tests.payment());
+        System.out.println(kudr.beginnig.Tests.biggerLesserEqual());
     }
 }

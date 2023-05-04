@@ -137,4 +137,33 @@ public class Tasks {
             System.out.println(ioEx.getMessage());
         }
     }
+    public static void biggerLesserEqual() {
+        String funcPath = "biggerLesserEqual/";
+        int[] numbs = new int[2];
+        try (FileReader reader = new FileReader(tasksPath + funcPath + inputName)) {
+            int ch;
+            StringBuilder readStr = new StringBuilder();
+            while ((ch = reader.read()) != -1) {
+                readStr.append((char) ch);
+            }
+            String[] tmpStr = readStr.toString().split("\\r?\\n");
+            try {
+                numbs[0] = Integer.parseInt(tmpStr[0]);
+                numbs[1] = Integer.parseInt(tmpStr[1]);
+            }
+            catch (NumberFormatException numEx) {
+                System.out.println(numEx.getMessage());
+            }
+        }
+        catch (IOException ioEx) {
+            System.out.println(ioEx.getMessage());
+        }
+        try (FileWriter writer = new FileWriter(tasksPath + funcPath + outputName)) {
+            writer.write(numbs[0] > numbs[1] ? ">" : numbs[0] == numbs[1] ? "=" : "<");
+            writer.flush();
+        }
+        catch (IOException ioEx) {
+            System.out.println(ioEx.getMessage());
+        }
+    }
 }
