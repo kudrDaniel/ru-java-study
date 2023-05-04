@@ -95,4 +95,47 @@ public class Tasks {
             System.out.println(ioEx.getMessage());
         }
     }
+    public static void payment() {
+        String funcPath = "payment/";
+        int[] numbs = new int[3];
+        try (FileReader reader = new FileReader(tasksPath + funcPath + inputName)) {
+            int ch;
+            StringBuilder readStr = new StringBuilder();
+            while ((ch = reader.read()) != -1) {
+                readStr.append((char) ch);
+            }
+            String[] tmpStr = readStr.toString().split(" ");
+            try {
+                for (int i = 0; i < numbs.length; i++) numbs[i] = Integer.parseInt(tmpStr[i]);
+            }
+            catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        catch (IOException ioEx) {
+            System.out.println(ioEx.getMessage());
+        }
+        boolean sorted = false;
+        while (!sorted) {
+            for (int i = 0; i < numbs.length; i++) {
+                if (i + 1 == numbs.length) continue;
+                if (numbs[i] > numbs[i + 1]) {
+                    numbs[i] += numbs[i + 1];
+                    numbs[i + 1] = numbs[i] - numbs[i + 1];
+                    numbs[i] -= numbs[i + 1];
+                    sorted = false;
+                    continue;
+                }
+                sorted = true;
+            }
+            System.out.println(numbs[0] + " " + numbs[1] + " " + numbs[2]);
+        }
+        try (FileWriter writer = new FileWriter(tasksPath + funcPath + outputName)) {
+            writer.write(Integer.toString(numbs[numbs.length - 1] - numbs[0]));
+            writer.flush();
+        }
+        catch (IOException ioEx) {
+            System.out.println(ioEx.getMessage());
+        }
+    }
 }
