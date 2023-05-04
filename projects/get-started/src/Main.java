@@ -3,6 +3,7 @@ public class Main {
         System.out.println("Hello world!");
         System.out.println("Some text with brackets \"YEAH\"");
         System.out.println(kudr.beginnig.Tests.sumFromFile());
-        kudr.beginnig.Tasks.guessGame();
+        System.out.println(kudr.beginnig.Tests.guessGame());
+        System.out.println(kudr.beginnig.Tests.arithmetic());
     }
 }
