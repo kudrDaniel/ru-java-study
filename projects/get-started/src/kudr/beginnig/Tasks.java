@@ -128,7 +128,6 @@ public class Tasks {
                 }
                 sorted = true;
             }
-            System.out.println(numbs[0] + " " + numbs[1] + " " + numbs[2]);
         }
         try (FileWriter writer = new FileWriter(tasksPath + funcPath + outputName)) {
             writer.write(Integer.toString(numbs[numbs.length - 1] - numbs[0]));

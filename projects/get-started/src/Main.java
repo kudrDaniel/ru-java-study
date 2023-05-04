@@ -5,6 +5,6 @@ public class Main {
         System.out.println(kudr.beginnig.Tests.sumFromFile());
         System.out.println(kudr.beginnig.Tests.guessGame());
         System.out.println(kudr.beginnig.Tests.arithmetic());
-        kudr.beginnig.Tasks.payment();
+        System.out.println(kudr.beginnig.Tests.payment());
     }
 }
